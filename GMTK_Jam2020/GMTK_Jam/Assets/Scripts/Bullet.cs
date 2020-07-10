@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Vector3 dir;
+    public float moveSpeed;
+
+    public void Init(Vector3 position, Vector3 direction, Quaternion rotation)
     {
-        
+        dir = direction.normalized;
+        transform.position = position;
+        transform.rotation = rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        transform.position += dir * moveSpeed * Time.deltaTime;
     }
 
-    void Move()
-    {
-
-    }
 }

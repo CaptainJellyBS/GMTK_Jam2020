@@ -24,6 +24,8 @@ public class Soldier : MonoBehaviour
         rotateDir = 1;
         walkDirection = Vector3.up;
         currentPoint = patrolPoints[index];
+        StartCoroutine(Shoot());
+
     }
 
     // Update is called once per frame
@@ -31,7 +33,6 @@ public class Soldier : MonoBehaviour
     {       
         MoveToPoint();
         RotateFire();
-        
     }
 
     void MoveToPoint()
@@ -47,7 +48,8 @@ public class Soldier : MonoBehaviour
 
     void ShootBullet()
     {
-
+        GameObject b = Instantiate(bullet);
+        b.GetComponent<Bullet>().Init(transform.position, transform.up, transform.rotation);
     }
 
     void RotateFire()
@@ -58,15 +60,14 @@ public class Soldier : MonoBehaviour
             rotateDir *= -1;
         }
 
-        Debug.Log(curAngle);
-
-        transform.rotation = Quaternion.AngleAxis(curAngle + Vector3.Angle(Vector3.up, transform.position - currentPoint.position), Vector3.forward);
+        transform.rotation = Quaternion.AngleAxis(curAngle + Vector3.SignedAngle(Vector3.up, currentPoint.position-transform.position,Vector3.forward), Vector3.forward);
     }
 
     IEnumerator Shoot()
     {
         while(true)
         {
+            Debug.Log("WTF");
             yield return new WaitForSeconds(fireRate);
             ShootBullet();
         }
