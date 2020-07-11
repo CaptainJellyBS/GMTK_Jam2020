@@ -50,7 +50,7 @@ public class Soldier : MonoBehaviour
     {
         if(Vector3.Distance(transform.position, currentPoint.position) < 0.1f)
         {
-            index++;
+            index++; index %= patrolPoints.Length;
             currentPoint = patrolPoints[index];
         }
 
