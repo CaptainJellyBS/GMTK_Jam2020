@@ -57,7 +57,7 @@ public class Soldier : MonoBehaviour
     void ShootBullet()
     {
         GameObject b = Instantiate(bullet);
-        b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up, transform.rotation);
+        b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up, transform.rotation, gameObject);
     }
 
     void RotateFire()

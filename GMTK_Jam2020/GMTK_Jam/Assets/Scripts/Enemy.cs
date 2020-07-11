@@ -9,19 +9,24 @@ public class Enemy : MonoBehaviour
     public Vector3 bulletOffset;
     public GameObject bullet;
     public float fireRate;
+    EnemyState currentState;
+    public bool shooting = false;
+
     // Start is called before the first frame update
     void Start()
     {
         direction = Vector3.zero;
-        StartCoroutine(Attack());
-
+        SwitchState(new IdleState());
     }
 
     // Update is called once per frame
     void Update()
     {
-        RotateToPlayer();
-        Move();
+        //RotateToPlayer();
+        //Move();
+
+        currentState.Behavior(this);
+        currentState.CheckConditions(this);
     }
 
     /// <summary>
@@ -37,21 +42,7 @@ public class Enemy : MonoBehaviour
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
 
-    IEnumerator Attack()
-    {
-        while (true)
-        {
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, (Soldier.Instance.transform.position - transform.position).normalized);
-            if (hit.collider.gameObject.CompareTag("Soldier"))
-            {
-                yield return StartCoroutine(Shoot());
-            }
-
-            yield return null;
-        }
-    }
-
-    void RotateToPlayer()
+    public void RotateToPlayer()
     {
         Vector3 dest = new Vector3(Soldier.Instance.transform.position.x, Soldier.Instance.transform.position.y, 0);
         float AngleRad = Mathf.Atan2(dest.y - transform.position.y, dest.x - transform.position.x);
@@ -61,21 +52,33 @@ public class Enemy : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, AngleDeg - 90);
     }
 
-    IEnumerator Shoot()
+    public IEnumerator Shoot()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, (Soldier.Instance.transform.position - transform.position).normalized);
-
-        while (hit.collider.gameObject.CompareTag("Soldier"))
+        while (shooting)
         {
             GameObject b = Instantiate(bullet);
-            b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up, transform.rotation);
+            b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up, transform.rotation, gameObject);
             yield return new WaitForSeconds(fireRate);
-            hit = Physics2D.Raycast(transform.position, (Soldier.Instance.transform.position - transform.position).normalized);
         }
     }
 
     public void Die()
     {
         Destroy(gameObject);
+    }
+
+    public void SwitchState(EnemyState newState)
+    {
+        if (currentState != null)
+        { currentState.Exit(this); }
+        currentState = newState;
+        currentState.Enter(this);
+    }
+
+    public bool IsSoldierInSight()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, (Soldier.Instance.transform.position - transform.position).normalized);
+        return hit.collider.gameObject.CompareTag("Soldier");
+
     }
 }

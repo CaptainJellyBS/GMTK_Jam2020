@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Net.NetworkInformation;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
     public Vector3 dir;
+    GameObject origin;
     public float moveSpeed;
 
-    public void Init(Vector3 position, Vector3 direction, Quaternion rotation)
+    public void Init(Vector3 position, Vector3 direction, Quaternion rotation, GameObject source)
     {
         dir = direction.normalized;
         transform.position = position;
         transform.rotation = rotation;
+        origin = source;
     }
 
     // Update is called once per frame
@@ -22,6 +25,10 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
+        //Don't collide with the original shooter
+        if (collision.gameObject == origin)
+        { Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>()); return; }
+
         switch(collision.gameObject.tag)
         {
             case "Player": Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>()); return;
