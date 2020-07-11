@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{2976ccf8-8696-4868-9d03-8f17fa5ec29d}">
+		<property name="assetPath">
+			<value>bark-004.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.3024036281179139</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{98116d81-b90c-4d72-8aaa-dcf50be1358a}</destination>
+		</relationship>
+	</object>
+</objects>

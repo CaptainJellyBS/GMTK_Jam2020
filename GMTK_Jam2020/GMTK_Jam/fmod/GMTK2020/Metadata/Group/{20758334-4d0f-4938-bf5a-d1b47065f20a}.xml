@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="MixerGroup" id="{20758334-4d0f-4938-bf5a-d1b47065f20a}">
+		<property name="name">
+			<value>Music</value>
+		</property>
+		<relationship name="effectChain">
+			<destination>{6ce03a50-1ea4-4dd6-b62b-cd03add61f09}</destination>
+		</relationship>
+		<relationship name="panner">
+			<destination>{a4afc398-176f-4f63-8b65-e563c240fdea}</destination>
+		</relationship>
+		<relationship name="output">
+			<destination>{c6a213ec-10bd-43dc-b6c9-46d927e0274f}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusEffectChain" id="{6ce03a50-1ea4-4dd6-b62b-cd03add61f09}">
+		<relationship name="effects">
+			<destination>{71dca6e2-b4f1-4d76-b1f8-3483b70ab2e4}</destination>
+			<destination>{6c083c03-1058-4836-a48f-1755b1774e5d}</destination>
+		</relationship>
+	</object>
+	<object class="MixerBusPanner" id="{a4afc398-176f-4f63-8b65-e563c240fdea}" />
+	<object class="MultibandEqEffect" id="{71dca6e2-b4f1-4d76-b1f8-3483b70ab2e4}">
+		<property name="filterTypeA">
+			<value>5</value>
+		</property>
+		<property name="filterTypeB">
+			<value>9</value>
+		</property>
+		<property name="filterTypeC">
+			<value>9</value>
+		</property>
+		<property name="filterTypeD">
+			<value>8</value>
+		</property>
+		<property name="frequencyA">
+			<value>75</value>
+		</property>
+		<property name="frequencyB">
+			<value>350</value>
+		</property>
+		<property name="frequencyC">
+			<value>1024.91663</value>
+		</property>
+		<property name="frequencyD">
+			<value>7186.53516</value>
+		</property>
+		<property name="qualityA">
+			<value>0.599999964</value>
+		</property>
+		<property name="qualityB">
+			<value>8.80000019</value>
+		</property>
+		<property name="qualityC">
+			<value>3.69999981</value>
+		</property>
+		<property name="qualityD">
+			<value>0.751586199</value>
+		</property>
+		<property name="gainB">
+			<value>-15</value>
+		</property>
+		<property name="gainC">
+			<value>-24.3103447</value>
+		</property>
+		<property name="gainD">
+			<value>-13.4482765</value>
+		</property>
+	</object>
+	<object class="MixerBusFader" id="{6c083c03-1058-4836-a48f-1755b1774e5d}" />
+</objects>
