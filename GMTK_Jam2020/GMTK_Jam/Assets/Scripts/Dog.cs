@@ -27,7 +27,7 @@ public class Dog : MonoBehaviour
 
     void Move()
     {
-        if(Input.GetMouseButtonDown(1))
+        if(Input.GetMouseButton(1))
         {
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             dest = new Vector3(mousePos.x, mousePos.y, 0);

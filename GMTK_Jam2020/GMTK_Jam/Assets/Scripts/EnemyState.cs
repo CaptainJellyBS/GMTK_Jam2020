@@ -83,12 +83,13 @@ public class FleeState : EnemyState
 
     public override void Enter(Enemy enemy)
     {
-         enemy.direction = ((Dog.Instance.transform.position - enemy.transform.position) * -1).normalized;
+        enemy.direction = ((Dog.Instance.transform.position - enemy.transform.position) * -1).normalized;
         Debug.Log("Switching to Flee State");
 
     }
     public override void Behavior(Enemy enemy)
     {
+        if(Input.GetMouseButtonDown(0)) { enemy. direction = ((Dog.Instance.transform.position - enemy.transform.position) * -1).normalized; }
         enemy.RunAway();
     }
 
