@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.00.00">
-	<object class="AudioFile" id="{5283864a-904f-4975-ad2c-78197ed15272}">
+	<object class="AudioFile" id="{2bc8ceb5-b205-496f-93db-a82f234f6d30}">
 		<property name="assetPath">
 			<value>bark-005.ogg</value>
 		</property>
@@ -11,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>1.3024036281179139</value>
+			<value>1.34578231292517</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{98116d81-b90c-4d72-8aaa-dcf50be1358a}</destination>

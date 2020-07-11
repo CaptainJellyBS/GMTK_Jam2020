@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.00.00">
-	<object class="AudioFile" id="{3aa8b193-29f6-4d36-b481-a9b18e7f825c}">
+	<object class="AudioFile" id="{32d62b11-e5e4-425f-aece-c20717b77ad9}">
 		<property name="assetPath">
-			<value>bark-003.ogg</value>
+			<value>396272__greenfiresound__smg-firing-03.wav</value>
 		</property>
 		<property name="frequencyInKHz">
 			<value>44.0999985</value>
@@ -11,7 +11,7 @@
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>1.3024036281179139</value>
+			<value>1.5220408163265307</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{98116d81-b90c-4d72-8aaa-dcf50be1358a}</destination>

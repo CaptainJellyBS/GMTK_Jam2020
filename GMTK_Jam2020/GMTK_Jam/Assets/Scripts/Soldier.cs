@@ -18,11 +18,14 @@ public class Soldier : MonoBehaviour
     int index;
     public Vector3 bulletOffset;
 
+    private AudioEmitter audioEmitter;
+
     public static Soldier Instance { get; private set; }
 
     private void Awake()
     {
         Instance = this;
+        audioEmitter = GetComponent<AudioEmitter>();
     }
 
     void Start()
@@ -58,6 +61,7 @@ public class Soldier : MonoBehaviour
     {
         GameObject b = Instantiate(bullet);
         b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up, transform.rotation, gameObject);
+        audioEmitter.PlaySound();
     }
 
     void RotateFire()
@@ -77,6 +81,7 @@ public class Soldier : MonoBehaviour
         {
             yield return new WaitForSeconds(fireRate);
             ShootBullet();
+            
         }
     }
 }

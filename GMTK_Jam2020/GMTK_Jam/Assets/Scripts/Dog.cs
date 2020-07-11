@@ -12,11 +12,14 @@ public class Dog : MonoBehaviour
     int curBodySprite, curPawSprite;
     public SpriteRenderer bodySpriteRenderer, pawSpriteRenderer;
 
+    private AudioEmitter audioEmitter;
+
     Vector3 dest;
     // Start is called before the first frame update
     private void Awake()
     {
         Instance = this;
+        audioEmitter = GetComponent<AudioEmitter>();
     }
 
     void Start()
@@ -44,6 +47,12 @@ public class Dog : MonoBehaviour
             float AngleDeg = (180 / Mathf.PI) * AngleRad;
             // Rotate Object
             transform.rotation = Quaternion.Euler(0, 0, AngleDeg - 90);
+            
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            audioEmitter.PlaySound();
         }
 
         isMoving = Vector3.Distance(dest, transform.position) > 0.05f;

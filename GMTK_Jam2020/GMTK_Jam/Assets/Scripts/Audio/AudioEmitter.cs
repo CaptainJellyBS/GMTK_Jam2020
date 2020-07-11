@@ -7,8 +7,8 @@ public class AudioEmitter : MonoBehaviour
 {
     [FMODUnity.EventRef] public string SoundEvent = "";
 
-    [SerializeField] private bool playOnAwake = true;
-    [SerializeField] private bool repeat = true;
+    [SerializeField] private bool playOnAwake = false;
+    [SerializeField] private bool repeat = false;
     [SerializeField] [Tooltip("How long until this audio repeats? (in seconds)")] private float repeatInterval = 0.5f;
     [SerializeField] [Tooltip("Should this audio be allowed to fade out when stopped?")] private bool allowFadeOut = false;
 
@@ -20,12 +20,15 @@ public class AudioEmitter : MonoBehaviour
 
     private Rigidbody rigidBody;
 
-    private void Start()
+    private void Awake()
     {
         rigidBody = GetComponent<Rigidbody>();
 
         sound = FMODUnity.RuntimeManager.CreateInstance(SoundEvent);
+    }
 
+    private void Start()
+    {
         //depending on settings, play audio once or repeat
         if (playOnAwake)
         {

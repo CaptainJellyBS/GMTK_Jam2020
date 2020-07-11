@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 8584373175016716761}
   - component: {fileID: 8584373175016716764}
   - component: {fileID: 8584373175016716767}
+  - component: {fileID: 7890781320258919260}
   m_Layer: 0
   m_Name: Dog
   m_TagString: Player
@@ -186,6 +187,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!114 &7890781320258919260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8584373175016716763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8f44ab384f02384da38e525f6af412b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SoundEvent: event:/Bark
+  playOnAwake: 0
+  repeat: 0
+  repeatInterval: 0.12
+  allowFadeOut: 1
 --- !u!1 &8584373175449082295
 GameObject:
   m_ObjectHideFlags: 0
