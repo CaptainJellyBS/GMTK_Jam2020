@@ -5,12 +5,14 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     public float moveSpeed;
-    Vector3 direction;
+    public Vector3 direction;
     public Vector3 bulletOffset;
     public GameObject bullet;
     public float fireRate;
+    public float fleeDistance;
     EnemyState currentState;
     public bool shooting = false;
+    public float bulletSpread;
 
     // Start is called before the first frame update
     void Start()
@@ -32,13 +34,8 @@ public class Enemy : MonoBehaviour
     /// <summary>
     /// Enemy moves away from the dog whenever the dog barks.
     /// </summary>
-    void Move()
+    public void RunAway()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            direction = ((Dog.Instance.transform.position - transform.position) * -1).normalized;
-        }
-
         transform.position += direction * moveSpeed * Time.deltaTime;
     }
 
@@ -57,7 +54,7 @@ public class Enemy : MonoBehaviour
         while (shooting)
         {
             GameObject b = Instantiate(bullet);
-            b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up, transform.rotation, gameObject);
+            b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up + transform.right * Random.Range(-bulletSpread, bulletSpread), transform.rotation, gameObject);
             yield return new WaitForSeconds(fireRate);
         }
     }
