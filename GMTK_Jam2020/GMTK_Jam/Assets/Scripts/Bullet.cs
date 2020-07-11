@@ -20,4 +20,16 @@ public class Bullet : MonoBehaviour
         transform.position += dir * moveSpeed * Time.deltaTime;
     }
 
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        switch(collision.gameObject.tag)
+        {
+            case "Player": Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>()); return;
+            case "Soldier": Debug.Log("Lol soldier ded"); Destroy(gameObject);  break;
+            case "Enemy": collision.gameObject.GetComponent<Enemy>().Die(); Destroy(gameObject); break;
+            case "Obstacle": Destroy(gameObject); break;
+            default: Destroy(gameObject); break;
+        }
+    }
+
 }

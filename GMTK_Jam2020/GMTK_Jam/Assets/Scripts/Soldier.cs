@@ -16,6 +16,14 @@ public class Soldier : MonoBehaviour
     public Transform[] patrolPoints;
     Transform currentPoint;
     int index;
+    public Vector3 bulletOffset;
+
+    public static Soldier Instance { get; private set; }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
 
     void Start()
     {
@@ -49,7 +57,7 @@ public class Soldier : MonoBehaviour
     void ShootBullet()
     {
         GameObject b = Instantiate(bullet);
-        b.GetComponent<Bullet>().Init(transform.position, transform.up, transform.rotation);
+        b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up, transform.rotation);
     }
 
     void RotateFire()
@@ -67,7 +75,6 @@ public class Soldier : MonoBehaviour
     {
         while(true)
         {
-            Debug.Log("WTF");
             yield return new WaitForSeconds(fireRate);
             ShootBullet();
         }
