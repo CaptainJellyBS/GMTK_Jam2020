@@ -147,5 +147,5 @@ MonoBehaviour:
   SoundEvent: event:/Shooting
   playOnAwake: 0
   repeat: 0
-  repeatInterval: 0.12
+  repeatInterval: 0.11
   allowFadeOut: 1

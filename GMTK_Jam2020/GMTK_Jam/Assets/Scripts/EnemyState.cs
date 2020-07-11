@@ -25,6 +25,8 @@ public class AttackState : EnemyState
     public override void Enter(Enemy enemy)
     {
         Debug.Log("Switching to Attack State");
+        Debug.Log(GameHandler.Instance);
+        GameHandler.Instance.attackingEnemies++;
         enemy.shooting = true;
         enemy.StartCoroutine(enemy.Shoot());
     }
@@ -49,6 +51,7 @@ public class AttackState : EnemyState
     public override void Exit(Enemy enemy)
     {
         enemy.shooting = false;
+        GameHandler.Instance.attackingEnemies--;
     }
 }
 
@@ -66,6 +69,8 @@ public class IdleState : EnemyState
 
     public override void CheckConditions(Enemy enemy)
     {
+        
+
         if (Vector3.Distance(enemy.transform.position, Dog.Instance.transform.position) <= enemy.fleeDistance && Input.GetMouseButtonDown(0))
         {
             enemy.SwitchState(new FleeState()); return;
@@ -86,6 +91,7 @@ public class FleeState : EnemyState
         enemy.direction = ((Dog.Instance.transform.position - enemy.transform.position) * -1).normalized;
         Debug.Log("Switching to Flee State");
 
+        
     }
     public override void Behavior(Enemy enemy)
     {
@@ -100,4 +106,5 @@ public class FleeState : EnemyState
             enemy.SwitchState(new IdleState());
         }
     }
+
 }

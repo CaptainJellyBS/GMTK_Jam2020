@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class GameHandler : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static GameHandler Instance { get; private set; }
 
-    // Update is called once per frame
-    void Update()
+    public List<Enemy> enemyList;
+
+    public int attackingEnemies = 0;
+
+    private void Awake()
     {
-        
+        Instance = this;
+
+        enemyList = new List<Enemy>();
+        enemyList.AddRange(FindObjectsOfType<Enemy>());
     }
 }
