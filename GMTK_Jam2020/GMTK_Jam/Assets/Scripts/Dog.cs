@@ -5,7 +5,12 @@ using UnityEngine;
 public class Dog : MonoBehaviour
 {
     public static Dog Instance { get; private set; }
-    public float forwardSpeed, backSpeed, strafeSpeed;
+    public float forwardSpeed;
+    bool isMoving;
+    public float walkAnimationSpeed, wagAnimationSpeed;
+    public Sprite[] bodySprites, pawSprites;
+    int curBodySprite, curPawSprite;
+    public SpriteRenderer bodySpriteRenderer, pawSpriteRenderer;
 
     Vector3 dest;
     // Start is called before the first frame update
@@ -17,6 +22,9 @@ public class Dog : MonoBehaviour
     void Start()
     {
         dest = transform.position;
+        curBodySprite = 0; curPawSprite = 0;
+        StartCoroutine(WalkAnimation());
+        StartCoroutine(WagAnimation());
     }
 
     // Update is called once per frame
@@ -38,7 +46,9 @@ public class Dog : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, AngleDeg - 90);
         }
 
-        if (Vector3.Distance(dest, transform.position) > 0.05f)
+        isMoving = Vector3.Distance(dest, transform.position) > 0.05f;
+        
+        if(isMoving)
         {
            transform.position += (dest - transform.position).normalized * forwardSpeed * Time.deltaTime;
         }
@@ -47,5 +57,31 @@ public class Dog : MonoBehaviour
     void Bark()
     {
 
+    }
+
+    IEnumerator WalkAnimation()
+    {
+        while (true)
+        {
+            while (isMoving)
+            {
+                yield return new WaitForSeconds(walkAnimationSpeed);
+                curPawSprite++; curPawSprite %= pawSprites.Length;
+                pawSpriteRenderer.sprite = pawSprites[curPawSprite];
+            }
+            pawSpriteRenderer.sprite = null;
+            yield return null;
+        }
+    }
+
+    IEnumerator WagAnimation()
+    {
+        while (true)
+        {
+                yield return new WaitForSeconds(wagAnimationSpeed);
+            curBodySprite++; curBodySprite %= bodySprites.Length;
+
+            bodySpriteRenderer.sprite = bodySprites[curBodySprite];
+        }
     }
 }
