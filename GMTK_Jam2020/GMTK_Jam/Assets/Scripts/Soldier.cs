@@ -18,6 +18,11 @@ public class Soldier : MonoBehaviour
     int index;
     public Vector3 bulletOffset;
 
+    public SpriteRenderer legsSprite, headSprite, bodySprite;
+    public Sprite[] legSprites, headSprites, bodySprites;
+    public int curLegSprite, curHeadSprite;
+    public float walkAnimationSpeed, headAnimationSpeed;
+
     private AudioEmitter audioEmitter;
 
     public static Soldier Instance { get; private set; }
@@ -36,7 +41,8 @@ public class Soldier : MonoBehaviour
         walkDirection = Vector3.up;
         currentPoint = patrolPoints[index];
         StartCoroutine(Shoot());
-
+        StartCoroutine(LegsAnimation());
+        StartCoroutine(HeadAnimation());
     }
 
     // Update is called once per frame
@@ -82,6 +88,28 @@ public class Soldier : MonoBehaviour
             yield return new WaitForSeconds(fireRate);
             ShootBullet();
             
+        }
+    }
+
+    IEnumerator LegsAnimation()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(walkAnimationSpeed);
+            curLegSprite++; curLegSprite %= legSprites.Length;
+
+            legsSprite.sprite = legSprites[curLegSprite];
+        }
+    }
+
+    IEnumerator HeadAnimation()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(headAnimationSpeed);
+            curHeadSprite++; curHeadSprite %= headSprites.Length;
+
+            headSprite.sprite = headSprites[curHeadSprite];
         }
     }
 }

@@ -61,6 +61,7 @@ public class Enemy : MonoBehaviour
 
     public void Die()
     {
+        currentState.Exit(this);
         Destroy(gameObject);
     }
 

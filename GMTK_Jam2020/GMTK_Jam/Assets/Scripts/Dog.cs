@@ -93,4 +93,12 @@ public class Dog : MonoBehaviour
             bodySpriteRenderer.sprite = bodySprites[curBodySprite];
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider);
+        }
+    }
 }
