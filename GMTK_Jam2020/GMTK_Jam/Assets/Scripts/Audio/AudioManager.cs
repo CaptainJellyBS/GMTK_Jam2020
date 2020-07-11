@@ -65,6 +65,7 @@ public class AudioManager : MonoBehaviour
         vol = Mathf.Clamp(vol, 0.0f, 1.0f);
         SetVolume(Track.Guitar, vol);
 
+        //if drums 
         if (GameHandler.Instance?.attackingEnemies == 0 && IsPlaying(Track.Drums))
         {
             fadeCoroutine = FadeOutTrack(Track.Drums, 0.5f);
@@ -137,7 +138,7 @@ public class AudioManager : MonoBehaviour
         float volume;
         inst.getVolume(out volume);
 
-        while (volume > 0.0f)
+        while (volume > 0)
         {
             inst.setVolume(volume - 0.01f / timeIn);
             inst.getVolume(out volume);
