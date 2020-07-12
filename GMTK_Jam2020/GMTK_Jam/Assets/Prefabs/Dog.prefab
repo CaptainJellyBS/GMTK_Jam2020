@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f138fd153783504a8d5cb21ea353129, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  forwardSpeed: 1.75
+  forwardSpeed: 2.5
   coneAngle: 30
   walkAnimationSpeed: 0.25
   wagAnimationSpeed: 0.2
