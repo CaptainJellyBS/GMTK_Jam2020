@@ -29,6 +29,7 @@ public class AttackState : EnemyState
         GameHandler.Instance.attackingEnemies++;
         enemy.shooting = true;
         enemy.StartCoroutine(enemy.Shoot());
+        enemy.SetAttackIcon(true);
     }
     public override void Behavior(Enemy enemy)
     {
@@ -51,6 +52,7 @@ public class AttackState : EnemyState
     public override void Exit(Enemy enemy)
     {
         enemy.shooting = false;
+        enemy.SetAttackIcon(false);
         GameHandler.Instance.attackingEnemies--;
     }
 }
@@ -90,8 +92,8 @@ public class FleeState : EnemyState
     {
         enemy.direction = ((Dog.Instance.transform.position - enemy.transform.position) * -1).normalized;
         Debug.Log("Switching to Flee State");
+        enemy.SetFleeIcon(true);
 
-        
     }
     public override void Behavior(Enemy enemy)
     {
@@ -105,6 +107,11 @@ public class FleeState : EnemyState
         {
             enemy.SwitchState(new IdleState());
         }
+    }
+
+    public override void Exit(Enemy enemy)
+    {
+        enemy.SetFleeIcon(false);
     }
 
 }

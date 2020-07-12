@@ -19,6 +19,8 @@ public class Enemy : MonoBehaviour
     public SpriteRenderer leggos;
     public float legspeed;
     int spriteIndex = 0;
+
+    public GameObject FleeEffect, AttackEffect;
     // Start is called before the first frame update
     void Start()
     {
@@ -107,5 +109,15 @@ public class Enemy : MonoBehaviour
     public bool IsWithinDogDistance()
     {
         return Vector3.Distance(transform.position, Dog.Instance.transform.position) <= fleeDistance;
+    }
+
+    public void SetFleeIcon(bool active)
+    {
+        FleeEffect.SetActive(active);
+    }
+
+    public void SetAttackIcon(bool active)
+    {
+        AttackEffect.SetActive(active);
     }
 }
