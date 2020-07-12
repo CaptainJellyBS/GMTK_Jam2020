@@ -51,16 +51,22 @@ public class GameHandler : MonoBehaviour
 
     public void RestartLevel()
     {
+        AudioManager.Instance.StopAllMusic();
+        AudioManager.Instance.StopAllSounds();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void GoToMainMenu()
     {
+        AudioManager.Instance.StopAllMusic();
+        AudioManager.Instance.StopAllSounds();
         SceneManager.LoadScene(0);
     }
 
     public void NextLevel()
     {
+        AudioManager.Instance.StopAllMusic();
+        AudioManager.Instance.StopAllSounds();
         SceneManager.LoadScene(nextLevel);
     }
 }
