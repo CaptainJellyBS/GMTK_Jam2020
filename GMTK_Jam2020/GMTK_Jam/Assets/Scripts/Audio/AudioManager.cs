@@ -9,12 +9,12 @@ public class AudioManager : MonoBehaviour
     [FMODUnity.EventRef] public string DrumsEvent;
     [FMODUnity.EventRef] public string GuitarEvent;
 
-
     FMOD.Studio.EventInstance bass;
     FMOD.Studio.EventInstance drums;
     FMOD.Studio.EventInstance guitar;
 
     private Dictionary<Track, FMOD.Studio.EventInstance> tracks;
+    private List<AudioEmitter> audioEmitters;
 
     public IEnumerator fadeCoroutine;
     private bool delayDone;
@@ -24,6 +24,8 @@ public class AudioManager : MonoBehaviour
     {
         Instance = this;
 
+        audioEmitters = new List<AudioEmitter>();
+        audioEmitters.AddRange(FindObjectsOfType<AudioEmitter>());
 
         bass = FMODUnity.RuntimeManager.CreateInstance(BassEvent);
         drums = FMODUnity.RuntimeManager.CreateInstance(DrumsEvent);
@@ -40,7 +42,7 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator AudioDelay()
     {
-        yield return new WaitForSeconds(2.0f);
+        yield return new WaitForSeconds(1.0f);
         foreach (FMOD.Studio.EventInstance i in tracks.Values)
         {
             i.setVolume(0.0f);
@@ -148,6 +150,14 @@ public class AudioManager : MonoBehaviour
             inst.getVolume(out volume);
 
             yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    public void StopAllSounds()
+    {
+        foreach (AudioEmitter a in audioEmitters)
+        {
+            a.StopSound();
         }
     }
 
