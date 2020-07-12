@@ -240,7 +240,7 @@ MonoBehaviour:
   walkAnimationSpeed: 0.7
   headAnimationSpeed: 0.25
   shootingSound: {fileID: 2571010119972240568}
-  dyingSound: {fileID: 0}
+  dyingSound: {fileID: 2194239579390299589}
 --- !u!61 &8077354288594931272
 BoxCollider2D:
   m_ObjectHideFlags: 0

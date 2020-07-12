@@ -199,8 +199,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyList: []
   nextLevel: 0
-  deathPanel: {fileID: 0}
-  finishPanel: {fileID: 0}
+  deathPanel: {fileID: 6229924191973465951}
+  finishPanel: {fileID: 2229546386700960266}
   attackingEnemies: 0
 --- !u!1 &6229924191973465951
 GameObject:
