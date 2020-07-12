@@ -1,13 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameHandler : MonoBehaviour
 {
     public static GameHandler Instance { get; private set; }
 
     public List<Enemy> enemyList;
-    public float nextLevel;
+    public int nextLevel;
     public GameObject deathPanel, finishPanel;
 
     public int attackingEnemies = 0;
@@ -46,6 +47,20 @@ public class GameHandler : MonoBehaviour
         Debug.Log("Ya died it");
         deathPanel.SetActive(true); 
         Time.timeScale = 0;
+    }
 
+    public void RestartLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(nextLevel);
     }
 }
