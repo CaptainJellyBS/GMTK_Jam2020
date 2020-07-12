@@ -44,6 +44,8 @@ public class GameHandler : MonoBehaviour
     public void Die()
     {
         Debug.Log("Ya died it");
-        deathPanel.SetActive(true);        
+        deathPanel.SetActive(true); 
+        Time.timeScale = 0;
+
     }
 }

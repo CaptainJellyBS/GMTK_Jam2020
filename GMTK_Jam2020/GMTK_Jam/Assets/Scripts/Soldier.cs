@@ -118,7 +118,6 @@ public class Soldier : MonoBehaviour
     public void Die()
     {
         dyingSound.PlaySound();
-        Time.timeScale = 0;
         GameHandler.Instance.Die();
     }
 }
