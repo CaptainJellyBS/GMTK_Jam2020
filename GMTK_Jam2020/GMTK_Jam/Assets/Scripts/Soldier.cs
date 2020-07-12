@@ -23,14 +23,14 @@ public class Soldier : MonoBehaviour
     public int curLegSprite, curHeadSprite;
     public float walkAnimationSpeed, headAnimationSpeed;
 
-    private AudioEmitter audioEmitter;
+    [SerializeField] private AudioEmitter shootingSound;
+    [SerializeField] private AudioEmitter dyingSound;
 
     public static Soldier Instance { get; private set; }
 
     private void Awake()
     {
         Instance = this;
-        audioEmitter = GetComponent<AudioEmitter>();
     }
 
     void Start()
@@ -67,7 +67,7 @@ public class Soldier : MonoBehaviour
     {
         GameObject b = Instantiate(bullet);
         b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up, transform.rotation, gameObject);
-        audioEmitter.PlaySound();
+        shootingSound.PlaySound();
     }
 
     void RotateFire()

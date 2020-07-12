@@ -61,11 +61,15 @@ public class AudioManager : MonoBehaviour
     private void Update()
     {
         //change the guitar volume based on the distance between Dog and Soldier
-        float vol = (12 - Vector3.Distance(Dog.Instance.transform.position, Soldier.Instance.transform.position)) / 10;
-        vol = Mathf.Clamp(vol, 0.0f, 1.0f);
-        SetVolume(Track.Guitar, vol);
+        if (delayDone)
+        {
+            float vol = (12 - Vector3.Distance(Dog.Instance.transform.position, Soldier.Instance.transform.position)) / 10;
 
-        //if drums 
+            vol = Mathf.Clamp(vol, 0.0f, 1.0f);
+            SetVolume(Track.Guitar, vol);
+        }
+
+        //if drums are playing but no enemies are attacking, fade out drums
         if (GameHandler.Instance?.attackingEnemies == 0 && IsPlaying(Track.Drums))
         {
             fadeCoroutine = FadeOutTrack(Track.Drums, 0.5f);
