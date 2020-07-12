@@ -142,7 +142,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: b70ec3cda39157445b1bf8989145d27e, type: 3}
   - {fileID: 21300000, guid: a9ec5338242ff7e4bbde7a0bd8ead15f, type: 3}
   leggos: {fileID: 7895705892548261215}
-  legspeed: 0.2
+  legspeed: 0.4
 --- !u!61 &6039193089793922650
 BoxCollider2D:
   m_ObjectHideFlags: 0
