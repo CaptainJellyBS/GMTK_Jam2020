@@ -114,4 +114,9 @@ public class Soldier : MonoBehaviour
             headSprite.sprite = headSprites[curHeadSprite];
         }
     }
+
+    void Die()
+    {
+        dyingSound.PlaySound();
+    }
 }
