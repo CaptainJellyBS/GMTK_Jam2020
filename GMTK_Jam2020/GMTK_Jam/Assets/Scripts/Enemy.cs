@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator AnimateLegs()
     {
-        while(true)
+        while (true)
         {
             yield return new WaitForSeconds(legspeed);
             spriteIndex++; spriteIndex %= leganimation.Length;
@@ -93,6 +93,18 @@ public class Enemy : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(transform.position, (Soldier.Instance.transform.position - transform.position).normalized);
         return hit.collider.gameObject.CompareTag("Soldier");
+    }
 
+    public bool IsWithinDogBark()
+    {
+        bool isDistanceRight = Vector3.Distance(transform.position, Dog.Instance.transform.position) <= fleeDistance;
+        float angle = Vector3.SignedAngle(Dog.Instance.transform.up, transform.position - Dog.Instance.transform.position, Vector3.forward);
+        bool isAngleRight = angle <= Dog.Instance.coneAngle && angle >= -Dog.Instance.coneAngle;
+        return isDistanceRight && isAngleRight && Input.GetMouseButtonDown(0);
+    }
+
+    public bool IsWithinDogDistance()
+    {
+        return Vector3.Distance(transform.position, Dog.Instance.transform.position) <= fleeDistance;
     }
 }
