@@ -46,12 +46,13 @@ public class AudioManager : MonoBehaviour
         yield return new WaitForSeconds(1.0f);
         foreach (EventInstance i in tracks.Values)
         {
-            i.setVolume(0.0f);
             i.start();
+            i.setVolume(0.0f);
         }
 
-        fadeCoroutine = FadeInTrack(Track.Bass, 3.0f);
-        StartCoroutine(fadeCoroutine);
+        //fadeCoroutine = FadeInTrack(Track.Bass, 3.0f);
+        //StartCoroutine(fadeCoroutine);
+        tracks[Track.Bass].setVolume(1.0f);
 
         delayDone = true;
     }
@@ -66,10 +67,12 @@ public class AudioManager : MonoBehaviour
         //change the guitar volume based on the distance between Dog and Soldier
         if (delayDone)
         {
-            float vol = (12 - Vector3.Distance(Dog.Instance.transform.position, Soldier.Instance.transform.position)) / 10;
-
+            tracks[Track.Guitar].getVolume(out float firstVolume);
+            float vol = (10 - Vector3.Distance(Dog.Instance.transform.position, Soldier.Instance.transform.position)) / 8;
             vol = Mathf.Clamp(vol, 0.0f, 1.0f);
-            SetVolume(Track.Guitar, vol);
+
+            
+            SetVolume(Track.Guitar, Mathf.Lerp(firstVolume,vol,0.1f));
         }
 
         //if drums are playing but no enemies are attacking, fade out drums
