@@ -130,6 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 1.75
+  coneAngle: 45
   walkAnimationSpeed: 0.25
   wagAnimationSpeed: 0.2
   bodySprites:
@@ -140,6 +141,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 0bb34af93469027438f9307b0f134298, type: 3}
   bodySpriteRenderer: {fileID: 8584373175449082292}
   pawSpriteRenderer: {fileID: 8584373174532942037}
+  barkDistance: 5
 --- !u!61 &8584373175016716764
 BoxCollider2D:
   m_ObjectHideFlags: 0

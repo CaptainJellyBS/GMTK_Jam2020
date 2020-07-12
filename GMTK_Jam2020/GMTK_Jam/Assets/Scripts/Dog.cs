@@ -6,13 +6,14 @@ public class Dog : MonoBehaviour
 {
     public static Dog Instance { get; private set; }
     public float forwardSpeed;
+    public float coneAngle;
     bool isMoving;
     public float walkAnimationSpeed, wagAnimationSpeed;
     public Sprite[] bodySprites, pawSprites;
     int curBodySprite, curPawSprite;
     public SpriteRenderer bodySpriteRenderer, pawSpriteRenderer;
-
     private AudioEmitter audioEmitter;
+    public float barkDistance;
 
     Vector3 dest;
     // Start is called before the first frame update
@@ -63,11 +64,6 @@ public class Dog : MonoBehaviour
         }
     }
 
-    void Bark()
-    {
-
-    }
-
     IEnumerator WalkAnimation()
     {
         while (true)
@@ -100,5 +96,11 @@ public class Dog : MonoBehaviour
         {
             Physics2D.IgnoreCollision(GetComponent<Collider2D>(), collision.collider);
         }
+    }
+
+    void SetConeLinePositions()
+    {
+        Vector3 leftPoint = Quaternion.AngleAxis(-coneAngle, transform.forward) * transform.up * barkDistance;
+        Vector3 rightPoint = Quaternion.AngleAxis(coneAngle, transform.forward) * transform.up * barkDistance;
     }
 }

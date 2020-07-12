@@ -37,7 +37,7 @@ public class AttackState : EnemyState
 
     public override void CheckConditions(Enemy enemy)
     {
-        if(Vector3.Distance(enemy.transform.position, Dog.Instance.transform.position) <= enemy.fleeDistance && Input.GetMouseButtonDown(0))
+        if(enemy.IsWithinDogBark())
         {
             enemy.SwitchState(new FleeState()); return;
         }
@@ -71,7 +71,7 @@ public class IdleState : EnemyState
     {
         
 
-        if (Vector3.Distance(enemy.transform.position, Dog.Instance.transform.position) <= enemy.fleeDistance && Input.GetMouseButtonDown(0))
+        if (enemy.IsWithinDogBark())
         {
             enemy.SwitchState(new FleeState()); return;
         }
@@ -95,13 +95,13 @@ public class FleeState : EnemyState
     }
     public override void Behavior(Enemy enemy)
     {
-        if(Input.GetMouseButtonDown(0)) { enemy. direction = ((Dog.Instance.transform.position - enemy.transform.position) * -1).normalized; }
+        if(enemy.IsWithinDogBark()) { enemy. direction = ((Dog.Instance.transform.position - enemy.transform.position) * -1).normalized; }
         enemy.RunAway();
     }
 
     public override void CheckConditions(Enemy enemy)
     {
-        if(Vector3.Distance(enemy.transform.position, Dog.Instance.transform.position) > enemy.fleeDistance)
+        if(!enemy.IsWithinDogDistance())
         {
             enemy.SwitchState(new IdleState());
         }
