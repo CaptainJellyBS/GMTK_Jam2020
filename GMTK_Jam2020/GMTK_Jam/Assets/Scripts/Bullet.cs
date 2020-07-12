@@ -33,7 +33,7 @@ public class Bullet : MonoBehaviour
         {
             case "Bullet": Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>()); return;
             case "Player": Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>()); return;
-            case "Soldier": Debug.Log("Lol soldier ded"); Destroy(gameObject);  break;
+            case "Soldier": Soldier.Instance.Die(); Destroy(gameObject);  break;
             case "Enemy": collision.gameObject.GetComponent<Enemy>().Die(); Destroy(gameObject); break;
             case "Obstacle": Destroy(gameObject); break;
             default: Destroy(gameObject); break;

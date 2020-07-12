@@ -115,8 +115,9 @@ public class Soldier : MonoBehaviour
         }
     }
 
-    void Die()
+    public void Die()
     {
         dyingSound.PlaySound();
+        GameHandler.Instance.Die();
     }
 }

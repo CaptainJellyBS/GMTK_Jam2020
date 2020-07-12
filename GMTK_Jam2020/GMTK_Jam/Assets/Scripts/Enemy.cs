@@ -78,6 +78,7 @@ public class Enemy : MonoBehaviour
     public void Die()
     {
         currentState.Exit(this);
+        GameHandler.Instance.RemoveEnemy(this);
         Destroy(gameObject);
     }
 
