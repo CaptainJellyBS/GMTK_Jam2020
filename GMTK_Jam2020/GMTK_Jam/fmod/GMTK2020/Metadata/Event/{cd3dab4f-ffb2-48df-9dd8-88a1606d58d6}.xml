@@ -206,6 +206,9 @@
 	<object class="MixerBusFader" id="{c9464a42-5b49-4454-b65b-9c23af5c5704}" />
 	<object class="SpatialiserEffect" id="{c9d8b37d-b127-444a-96f7-3830644f7478}" />
 	<object class="MixerSend" id="{127ab051-3fc0-4c9e-9c73-a9b0fe0fc7e3}">
+		<property name="level">
+			<value>-19</value>
+		</property>
 		<property name="inputFormat">
 			<value>2</value>
 		</property>
