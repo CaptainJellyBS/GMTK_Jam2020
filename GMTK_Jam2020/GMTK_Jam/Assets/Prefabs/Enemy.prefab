@@ -215,7 +215,7 @@ MonoBehaviour:
   bulletOffset: {x: 0, y: 0.35, z: 0}
   bullet: {fileID: 146230793280767828, guid: 740664fe9665406458dcfc9dd2d2c99e, type: 3}
   fireRate: 0.1
-  fleeDistance: 5
+  fleeDistance: 3
   shooting: 0
   bulletSpread: 0.1
   leganimation:
