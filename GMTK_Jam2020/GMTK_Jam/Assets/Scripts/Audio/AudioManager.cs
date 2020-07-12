@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using FMOD.Studio;
 
 public enum Track { Bass, Drums, Guitar }
 public class AudioManager : MonoBehaviour
@@ -9,11 +10,11 @@ public class AudioManager : MonoBehaviour
     [FMODUnity.EventRef] public string DrumsEvent;
     [FMODUnity.EventRef] public string GuitarEvent;
 
-    FMOD.Studio.EventInstance bass;
-    FMOD.Studio.EventInstance drums;
-    FMOD.Studio.EventInstance guitar;
+    EventInstance bass;
+    EventInstance drums;
+    EventInstance guitar;
 
-    private Dictionary<Track, FMOD.Studio.EventInstance> tracks;
+    private Dictionary<Track, EventInstance> tracks;
     private List<AudioEmitter> audioEmitters;
 
     public IEnumerator fadeCoroutine;
@@ -31,7 +32,7 @@ public class AudioManager : MonoBehaviour
         drums = FMODUnity.RuntimeManager.CreateInstance(DrumsEvent);
         guitar = FMODUnity.RuntimeManager.CreateInstance(GuitarEvent);
 
-        tracks = new Dictionary<Track, FMOD.Studio.EventInstance>()
+        tracks = new Dictionary<Track, EventInstance>()
         { 
             {Track.Bass, bass}, 
             {Track.Drums, drums}, 
@@ -43,7 +44,7 @@ public class AudioManager : MonoBehaviour
     private IEnumerator AudioDelay()
     {
         yield return new WaitForSeconds(1.0f);
-        foreach (FMOD.Studio.EventInstance i in tracks.Values)
+        foreach (EventInstance i in tracks.Values)
         {
             i.setVolume(0.0f);
             i.start();
@@ -89,7 +90,7 @@ public class AudioManager : MonoBehaviour
 
     public bool IsPlaying(Track track)
     {
-        FMOD.Studio.EventInstance inst;
+        EventInstance inst;
         tracks.TryGetValue(track, out inst);
         if (!inst.isValid() || !delayDone)
             return false;
@@ -114,7 +115,7 @@ public class AudioManager : MonoBehaviour
 
     public void SetVolume(Track track, float volume)
     {
-        FMOD.Studio.EventInstance inst;
+        EventInstance inst;
         tracks.TryGetValue(track, out inst);
 
         inst.setVolume(volume);
@@ -123,7 +124,7 @@ public class AudioManager : MonoBehaviour
 
     public IEnumerator FadeInTrack(Track track, float timeIn)
     {
-        tracks.TryGetValue(track, out FMOD.Studio.EventInstance inst);
+        tracks.TryGetValue(track, out EventInstance inst);
 
         float volume;
         inst.getVolume(out volume);
@@ -139,7 +140,7 @@ public class AudioManager : MonoBehaviour
 
     public IEnumerator FadeOutTrack(Track track, float timeIn)
     {
-        tracks.TryGetValue(track, out FMOD.Studio.EventInstance inst);
+        tracks.TryGetValue(track, out EventInstance inst);
 
         float volume;
         inst.getVolume(out volume);
@@ -153,6 +154,13 @@ public class AudioManager : MonoBehaviour
         }
     }
 
+    public void StopAllMusic()
+    {
+        tracks[Track.Bass].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        tracks[Track.Guitar].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+        tracks[Track.Drums].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+    }
+
     public void StopAllSounds()
     {
         foreach (AudioEmitter a in audioEmitters)
@@ -163,7 +171,7 @@ public class AudioManager : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        foreach (FMOD.Studio.EventInstance i in tracks.Values)
+        foreach (EventInstance i in tracks.Values)
         {
             i.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
             i.release();
