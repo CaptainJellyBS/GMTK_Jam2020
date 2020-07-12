@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,11 +15,16 @@ public class Enemy : MonoBehaviour
     public bool shooting = false;
     public float bulletSpread;
 
+    public Sprite[] leganimation;
+    public SpriteRenderer leggos;
+    public float legspeed;
+    int spriteIndex = 0;
     // Start is called before the first frame update
     void Start()
     {
         direction = Vector3.zero;
         SwitchState(new IdleState());
+        StartCoroutine(AnimateLegs());
     }
 
     // Update is called once per frame
@@ -54,8 +60,18 @@ public class Enemy : MonoBehaviour
         while (shooting)
         {
             GameObject b = Instantiate(bullet);
-            b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up + transform.right * Random.Range(-bulletSpread, bulletSpread), transform.rotation, gameObject);
+            b.GetComponent<Bullet>().Init(transform.position + (transform.rotation * bulletOffset), transform.up + transform.right * UnityEngine.Random.Range(-bulletSpread, bulletSpread), transform.rotation, gameObject);
             yield return new WaitForSeconds(fireRate);
+        }
+    }
+
+    IEnumerator AnimateLegs()
+    {
+        while(true)
+        {
+            yield return new WaitForSeconds(legspeed);
+            spriteIndex++; spriteIndex %= leganimation.Length;
+            leggos.sprite = leganimation[spriteIndex];
         }
     }
 

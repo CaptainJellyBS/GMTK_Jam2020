@@ -79,6 +79,8 @@ public class Soldier : MonoBehaviour
         }
 
         transform.rotation = Quaternion.AngleAxis(curAngle + Vector3.SignedAngle(Vector3.up, currentPoint.position-transform.position,Vector3.forward), Vector3.forward);
+        legsSprite.transform.localRotation = Quaternion.AngleAxis(-curAngle, Vector3.forward);
+        headSprite.transform.localRotation = Quaternion.AngleAxis(-curAngle, Vector3.forward);
     }
 
     IEnumerator Shoot()
