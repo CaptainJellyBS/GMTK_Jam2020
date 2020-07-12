@@ -130,7 +130,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   forwardSpeed: 1.75
-  coneAngle: 45
+  coneAngle: 30
   walkAnimationSpeed: 0.25
   wagAnimationSpeed: 0.2
   bodySprites:
